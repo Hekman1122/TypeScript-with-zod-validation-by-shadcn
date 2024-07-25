@@ -4,6 +4,9 @@ import FormComponent from "@/components/FormComponent";
 import CardComponent from "@/components/CardComponent";
 import { useState } from "react";
 import { User } from "@/type/type";
+import axios from "axios";
+import jwt from "jsonwebtoken";
+
 export default function MainComponent() {
   const [users, setUsers] = useState<User[]>([]);
   const handleSubmit = (username: string, email: string, age: string): void => {
@@ -21,10 +24,12 @@ export default function MainComponent() {
     let newUserList = users.filter((user) => user.id !== id);
     setUsers(newUserList);
   };
+
   return (
-    <div>
+    <div className="py-6">
       <FormComponent handleSubmit={handleSubmit} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4">
         {users.length != 0 &&
           users.map((user) => (
             <CardComponent

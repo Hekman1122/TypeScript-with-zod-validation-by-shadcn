@@ -13,7 +13,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { User } from "@/type/type";
 
 const formSchema = z.object({
   username: z
@@ -22,7 +21,9 @@ const formSchema = z.object({
   email: z
     .string({ required_error: "此欄位為必須" })
     .email({ message: "請輸入電子信箱格式" }),
-  age: z.string({ required_error: "此欄位為必須" }),
+  age: z
+    .string({ required_error: "此欄位為必須" })
+    .regex(/^[^-]/, { message: "年齡不可以小於0" }),
 });
 
 type FormComponentProps = {
@@ -47,7 +48,7 @@ export default function FormComponent({ handleSubmit }: FormComponentProps) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 shadow-md p-4 rounded-md w-full sm:w-2/3 md:w-1/2 xl:w-1/3 mx-auto mb-8"
+        className="space-y-6 shadow-md p-4 rounded-md w-full sm:w-2/3 md:w-1/2 xl:w-1/3 mx-auto mb-8 border-2"
       >
         <FormField
           control={form.control}
