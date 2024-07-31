@@ -16,12 +16,11 @@ type UserProps = {
 };
 type CardProps = {
   user: UserProps;
-  handleDelete: (id: string) => void;
 };
-
+import { useUserState } from "@/lib/state";
 export default function CardComponent(props: CardProps) {
+  const handleDelete = useUserState((state) => state.deleteUser);
   const { id, username, email, age } = props.user;
-  const handleDelete = props.handleDelete;
   return (
     <Card>
       <CardHeader>

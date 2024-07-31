@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
+import { useUserState } from "@/lib/state";
+
 const formSchema = z.object({
   username: z
     .string({ required_error: "此欄位為必須" })
@@ -26,11 +28,14 @@ const formSchema = z.object({
     .regex(/^[^-]/, { message: "年齡不可以小於0" }),
 });
 
-type FormComponentProps = {
-  handleSubmit: (username: string, email: string, age: string) => void;
-};
+// type FormComponentProps = {
+//   handleSubmit: (username: string, email: string, age: string) => void;
+// };
 
-export default function FormComponent({ handleSubmit }: FormComponentProps) {
+export default function FormComponent() {
+  //create new user
+  const addUser = useUserState((state) => state.addUser);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,7 +46,7 @@ export default function FormComponent({ handleSubmit }: FormComponentProps) {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     const { username, email, age } = values;
-    handleSubmit(username, email, age);
+    addUser(username, email, age);
     form.reset();
   }
   return (
