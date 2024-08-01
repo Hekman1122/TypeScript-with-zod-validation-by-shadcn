@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
+import { DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -28,10 +28,6 @@ const formSchema = z.object({
     .regex(/^[^-]/, { message: "年齡不可以小於0" }),
 });
 
-// type FormComponentProps = {
-//   handleSubmit: (username: string, email: string, age: string) => void;
-// };
-
 export default function FormComponent() {
   //create new user
   const addUser = useUserState((state) => state.addUser);
@@ -53,7 +49,7 @@ export default function FormComponent() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 shadow-md p-4 rounded-md w-full sm:w-2/3 md:w-1/2 xl:w-1/3 mx-auto mb-8 border-2"
+        className="space-y-8 shadow-md px-4 pb-6 pt-4 rounded-md w-full mx-auto mb-4 border-2"
       >
         <FormField
           control={form.control}
@@ -61,11 +57,11 @@ export default function FormComponent() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-neutral-600 font-semibold text-sm">
-                用戶名稱
+                Name
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="請輸入用戶名稱"
+                  placeholder="Enter name"
                   {...field}
                   className="text-neutral-600 font-semibold text-sm"
                 />
@@ -80,11 +76,11 @@ export default function FormComponent() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-neutral-600 font-semibold text-sm">
-                用戶信箱
+                Email
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="請輸入電子信箱"
+                  placeholder="Enter email"
                   {...field}
                   className="text-neutral-600 font-semibold text-sm"
                 />
@@ -99,11 +95,11 @@ export default function FormComponent() {
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-neutral-600 font-semibold text-sm">
-                用戶年齡
+                Age
               </FormLabel>
               <FormControl>
                 <Input
-                  placeholder="請輸入年齡"
+                  placeholder="Enter age"
                   {...field}
                   className="text-neutral-600 font-semibold text-sm"
                 />
@@ -112,7 +108,11 @@ export default function FormComponent() {
             </FormItem>
           )}
         />
-        <Button type="submit">新增用戶</Button>
+        <div className="flex justify-end">
+          <DialogClose>
+            <Button type="submit">Save user</Button>
+          </DialogClose>
+        </div>
       </form>
     </Form>
   );

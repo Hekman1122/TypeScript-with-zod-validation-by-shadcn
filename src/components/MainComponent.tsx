@@ -1,34 +1,26 @@
 "use client";
-import { v4 as uuidv4 } from "uuid";
 import FormComponent from "@/components/FormComponent";
+import ModalContainer from "./ModalContainer";
 import CardComponent from "@/components/CardComponent";
-import { useState } from "react";
-import { User } from "@/type/type";
 import { useUserState } from "@/lib/state";
+import { Sandwich } from "lucide-react";
 export default function MainComponent() {
-  // const [users, setUsers] = useState<User[]>([]);
-  // const handleSubmit = (username: string, email: string, age: string): void => {
-  //   const newUser = {
-  //     id: uuidv4(),
-  //     username,
-  //     email,
-  //     age,
-  //   };
-  //   setUsers((prev) => {
-  //     return [...prev, newUser];
-  //   });
-  // };
-  // const handleDelete = (id: string): void => {
-  //   let newUserList = users.filter((user) => user.id !== id);
-  //   setUsers(newUserList);
-  // };
   //引入使用者狀態
   const users = useUserState((state) => state.users);
   return (
-    <div className="py-6">
-      <FormComponent />
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4">
+    <div>
+      <header className="flex justify-between items-center  border-b-2 pt-6 pb-4">
+        {/* logo and title */}
+        <div className="flex justify-center items-center gap-6">
+          <Sandwich
+            size={48}
+            className="bg-neutral-700 text-yellow-400 rounded-full p-1"
+          />
+          <h1 className="text-xl font-bold">User Management System</h1>
+        </div>
+        <ModalContainer />
+      </header>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 px-4 py-8">
         {users.length != 0 &&
           users.map((user) => <CardComponent key={user.id} user={user} />)}
       </div>
