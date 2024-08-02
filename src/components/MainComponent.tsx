@@ -1,9 +1,8 @@
 "use client";
-import FormComponent from "@/components/FormComponent";
 import ModalContainer from "./ModalContainer";
 import CardComponent from "@/components/CardComponent";
 import { useUserState } from "@/lib/state";
-import { Sandwich } from "lucide-react";
+import { Users } from "lucide-react";
 export default function MainComponent() {
   //引入使用者狀態
   const users = useUserState((state) => state.users);
@@ -12,7 +11,7 @@ export default function MainComponent() {
       <header className="flex justify-between items-center  border-b-2 pt-6 pb-4">
         {/* logo and title */}
         <div className="flex justify-center items-center gap-6">
-          <Sandwich
+          <Users
             size={48}
             className="bg-neutral-700 text-yellow-400 rounded-full p-1"
           />
